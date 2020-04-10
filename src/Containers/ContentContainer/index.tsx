@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import LocationInfo from '../../Components/LocationInfo';
 import WeatherContainer from '../WeatherContainer';
+import AdvicesContainer from '../AdvicesContainer';
+import LocationInfo from '../../Components/LocationInfo';
 import { GEO_API_LINK, WEATHER_API_LINK, WEATHER_API_KEY } from '../../Configurations/config';
 import { LOADING_MESSAGE, LOCATION_API_ERROR, WEATHER_API_ERROR } from '../../Configurations/constants';
 import styles from './styles.module.scss';
@@ -60,28 +61,31 @@ export default class ContentContainer extends Component {
         if (weatherResult.cod !== 200) {
           throw new Error(WEATHER_API_ERROR);
         }
-        this.setState(() => {
-          const {
-            weather: [{ main, description }],
-            main: { temp, feels_like, temp_min, temp_max },
-            wind: { speed },
-            sys: { sunrise, sunset },
-          } = weatherResult;
+        this.setState(
+          () => {
+            const {
+              weather: [{ main, description }],
+              main: { temp, feels_like, temp_min, temp_max },
+              wind: { speed },
+              sys: { sunrise, sunset },
+            } = weatherResult;
 
-          return {
-            weather: {
-              main,
-              description,
-              temp,
-              tempFeelsLike: feels_like,
-              tempMin: temp_min,
-              tempMax: temp_max,
-              windSpeed: speed,
-              sunrise,
-              sunset,
-            },
-          };
-        }, () => console.log(this.state.weather));
+            return {
+              weather: {
+                main,
+                description,
+                temp,
+                tempFeelsLike: feels_like,
+                tempMin: temp_min,
+                tempMax: temp_max,
+                windSpeed: speed,
+                sunrise,
+                sunset,
+              },
+            };
+          },
+          () => console.log(this.state.weather)
+        );
 
         this.onStable();
       })
@@ -128,7 +132,12 @@ export default class ContentContainer extends Component {
         {this.state.country && this.state.regionName && (
           <LocationInfo country={this.state.country} regionName={this.state.regionName} />
         )}
-        {this.state.weather.temp && <WeatherContainer weather={this.state.weather} />}
+        <div className={styles.content}>
+          {this.state.weather.temp && <WeatherContainer weather={this.state.weather} />}
+          <div className="content__visual">
+            <AdvicesContainer />
+          </div>
+        </div>
       </div>
     );
   }

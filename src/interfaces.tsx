@@ -16,3 +16,15 @@ export interface WeatherContainerProps {
     sunset: number;
   };
 }
+
+export interface SunriseProps {
+  timestamp: number;
+}
+
+export interface SunsetProps {
+  timestamp: number;
+}
+
+export interface WeatherImageProps {
+  condition: string;
+}
