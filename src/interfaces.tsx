@@ -50,3 +50,22 @@ export interface AdvicesAttributesProps {
   temperature: number;
   status: string;
 }
+
+export interface WeatherForecastProps {
+  main: string;
+  description: string;
+  temp: number;
+  tempFeelsLike: number;
+  tempMin: number;
+  tempMax: number;
+}
+export interface WeatherDetailsProps {
+  pressure: number;
+  humidity: number;
+  windSpeed: number;
+}
+
+export interface WeatherSunProps {
+  sunrise: number;
+  sunset: number;
+}
