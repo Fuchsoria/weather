@@ -1,12 +1,12 @@
 import React from 'react';
 import { WeatherImageProps } from '../../interfaces';
-import { ReactComponent as Thunderstorm } from './thunderstorm.svg';
-import { ReactComponent as Drizzle } from './drizzle.svg';
-import { ReactComponent as Rain } from './rain.svg';
-import { ReactComponent as Snow } from './snow.svg';
-import { ReactComponent as Clear } from './clear.svg';
-import { ReactComponent as Clouds } from './clouds.svg';
-import { ReactComponent as Atmosphere } from './atmosphere.svg';
+import { ReactComponent as Thunderstorm } from './images/thunderstorm.svg';
+import { ReactComponent as Drizzle } from './images/drizzle.svg';
+import { ReactComponent as Rain } from './images/rain.svg';
+import { ReactComponent as Snow } from './images/snow.svg';
+import { ReactComponent as Clear } from './images/clear.svg';
+import { ReactComponent as Clouds } from './images/clouds.svg';
+import { ReactComponent as Atmosphere } from './images/atmosphere.svg';
 import styles from './styles.module.scss';
 
 export default function WeatherImage({ condition }: WeatherImageProps) {

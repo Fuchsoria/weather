@@ -144,9 +144,7 @@ export default class ContentContainer extends Component {
         )}
         <div className={styles.content}>
           {this.state.weather.temp && <WeatherContainer weather={this.state.weather} />}
-          <div className="content__visual">
-            <AdvicesContainer />
-          </div>
+          {this.state.weather.main && <AdvicesContainer status={this.state.weather.main} feelsLike={this.state.weather.tempFeelsLike}/>}
         </div>
       </div>
     );

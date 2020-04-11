@@ -36,3 +36,17 @@ export interface ForecastProgressProps {
   min: number;
   max: number;
 }
+
+export interface AdvicesContainerProps {
+  status: string;
+  feelsLike: number;
+}
+
+export interface AdvicesDressProps {
+  temperature: number;
+}
+
+export interface AdvicesAttributesProps {
+  temperature: number;
+  status: string;
+}

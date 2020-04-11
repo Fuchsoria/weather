@@ -1,0 +1,18 @@
+.advices-dress {
+  &__image {
+    display: block;
+    margin: 0 auto;
+    width: 60%;
+    height: auto;
+  }
+  &__text {
+    margin: 0 0 0.7em 0;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1;
+    text-align: center;
+    &_marked {
+      color: black;
+    }
+  }
+}

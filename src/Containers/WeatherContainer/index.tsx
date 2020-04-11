@@ -30,7 +30,7 @@ export default class WeatherContainer extends Component<WeatherContainerProps> {
 
     return (
       <div className={styles.weather}>
-        <Card>
+        <Card title='Weather Forecast'>
           <div className={styles['weather__main-container']}>
             <div className={styles['weather__main-info']}>
               <p className={styles['weather__date']}>
