@@ -9,7 +9,7 @@
 
 .content {
   display: grid;
-  grid-template-columns: 65% 35%;
+  grid-template-columns: 1fr;
   grid-column-gap: 15px;
   grid-row-gap: 15px;
 }

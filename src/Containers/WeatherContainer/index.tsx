@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Card } from 'antd';
 import cn from 'classnames';
 import { WeatherContainerProps } from '../../interfaces';
+import AdvicesContainer from '../AdvicesContainer';
 import WeatherImage from '../../Components/WeatherImage';
 import Sunrise from '../../Components/Sunrise';
 import Sunset from '../../Components/Sunset';
@@ -30,7 +31,7 @@ export default class WeatherContainer extends Component<WeatherContainerProps> {
 
     return (
       <div className={styles.weather}>
-        <Card title='Weather Forecast'>
+        <Card title="Weather Forecast">
           <div className={styles['weather__main-container']}>
             <div className={styles['weather__main-info']}>
               <p className={styles['weather__date']}>
@@ -51,16 +52,19 @@ export default class WeatherContainer extends Component<WeatherContainerProps> {
           </div>
         </Card>
         <Card title="Current Details">
-          <p className={styles['weather__paragraph']}>Pressure: {pressure} hPa</p>
-          <p className={styles['weather__paragraph']}>Humidity: {humidity} &#37;</p>
-          <p className={styles['weather__paragraph']}>Wind Speed: {windSpeed.toFixed(1)} Km/h</p>
+          <div className={styles['weather__details']}>
+            <p className={styles['weather__paragraph']}>Pressure: {pressure} hPa</p>
+            <p className={styles['weather__paragraph']}>Humidity: {humidity} &#37;</p>
+            <p className={paragraphWithoutMargin}>Wind Speed: {windSpeed.toFixed(1)} Km/h</p>
+          </div>
         </Card>
-        <Card>
+        <Card title="Sunrise and Sunset">
           <div className={styles['weather__grid-columns']}>
             <Sunrise timestamp={sunrise} />
             <Sunset timestamp={sunset} />
           </div>
         </Card>
+        <AdvicesContainer status={main} feelsLike={tempFeelsLike} />
       </div>
     );
   }
