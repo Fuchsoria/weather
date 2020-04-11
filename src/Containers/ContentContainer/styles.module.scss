@@ -6,3 +6,9 @@
   padding: 15px;
   background-color: #fff;
 }
+
+.content {
+  display: grid;
+  grid-template-columns: 65% 35%;
+  grid-column-gap: 15px;
+}
