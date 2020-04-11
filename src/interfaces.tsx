@@ -69,3 +69,25 @@ export interface WeatherSunProps {
   sunrise: number;
   sunset: number;
 }
+
+export interface ContentContainerState {
+  isLoading: boolean;
+  isError: boolean;
+  errorMessage: string;
+  country: string;
+  countryCode: string;
+  regionName: string;
+  weather: {
+    main: string;
+    description: string;
+    temp: number;
+    tempFeelsLike: number;
+    tempMin: number;
+    tempMax: number;
+    pressure: number;
+    humidity: number;
+    windSpeed: number;
+    sunrise: number;
+    sunset: number;
+  };
+}

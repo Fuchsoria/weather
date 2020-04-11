@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
+import { ContentContainerState } from '../../interfaces';
 import WeatherContainer from '../WeatherContainer';
 import LocationInfo from '../../Components/LocationInfo';
 import { GEO_API_LINK, GEO_API_KEY, WEATHER_API_LINK, WEATHER_API_KEY } from '../../Configurations/config';
-import { LOADING_MESSAGE, LOCATION_API_ERROR, WEATHER_API_ERROR } from '../../Configurations/constants';
+import {
+  LOADING_MESSAGE,
+  LOCATION_API_ERROR,
+  WEATHER_API_ERROR,
+  GEO_LOCATION_BROWSER_ERROR,
+} from '../../Configurations/constants';
 import styles from './styles.module.scss';
 
-export default class ContentContainer extends Component {
+export default class ContentContainer extends Component<{}, ContentContainerState> {
   state = {
     isLoading: false,
     isError: false,
@@ -103,9 +109,12 @@ export default class ContentContainer extends Component {
 
   getLocation() {
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(this.getWeatherByBrowserGeo, this.getWeatherByIpGeo);
+      navigator.geolocation.getCurrentPosition(this.getWeatherByBrowserGeo, this.getWeatherByIpGeo, {
+        timeout: 1000,
+        enableHighAccuracy: true,
+      });
     } else {
-      console.log('Geo Location not supported by browser');
+      this.onError(GEO_LOCATION_BROWSER_ERROR);
     }
   }
 
