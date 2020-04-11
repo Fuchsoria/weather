@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import WeatherContainer from '../WeatherContainer';
 import LocationInfo from '../../Components/LocationInfo';
-import { GEO_API_LINK, WEATHER_API_LINK, WEATHER_API_KEY } from '../../Configurations/config';
+import { GEO_API_LINK, GEO_API_KEY, WEATHER_API_LINK, WEATHER_API_KEY } from '../../Configurations/config';
 import { LOADING_MESSAGE, LOCATION_API_ERROR, WEATHER_API_ERROR } from '../../Configurations/constants';
 import styles from './styles.module.scss';
 
@@ -30,7 +30,7 @@ export default class ContentContainer extends Component {
 
   componentDidMount() {
     this.onLoading(LOADING_MESSAGE);
-    fetch(`${GEO_API_LINK}/json/?fields=status,message,country,countryCode,regionName,zip`)
+    fetch(`${GEO_API_LINK}/ipgeo?apiKey=${GEO_API_KEY}&fields=country_name,country_code2,state_prov,zipcode&output=json`)
       .then((response) => {
         if (response.status !== 200) {
           throw new Error(LOCATION_API_ERROR);
@@ -39,18 +39,14 @@ export default class ContentContainer extends Component {
         return response.json();
       })
       .then((result) => {
-        if (result.status !== 'success') {
-          throw new Error(LOCATION_API_ERROR);
-        }
-
         this.setState({
-          country: result.country,
-          countryCode: result.countryCode,
-          regionName: result.regionName,
+          country: result.country_name,
+          countryCode: result.country_code2,
+          regionName: result.state_prov,
         });
 
         return fetch(
-          `${WEATHER_API_LINK}/data/2.5/weather?zip=${result.zip},${result.countryCode}&appid=${WEATHER_API_KEY}&units=metric`
+          `${WEATHER_API_LINK}/data/2.5/weather?zip=${result.zipcode},${result.country_code2}&appid=${WEATHER_API_KEY}&units=metric`
         );
       })
       .then((weatherResponse) => {
