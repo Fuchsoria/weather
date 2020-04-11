@@ -1,44 +1,55 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Умный сервис прогноза погоды 
+> Уровень: Звёздный?
 
-## Available Scripts
+Serverless браузерное приложение прогноза погоды по геолокации. От пользователя не требуются никакие лишние действия так как вся необходимая для него информация будет выдана по его браузерной геолокации за счёт pwa методов браузера либо через получение геолокации со стороннего api за счёт ip пользователя.
 
-In the project directory, you can run:
+>  **Демо:** [weather.fuchsoria.dev](https://weather.fuchsoria.dev)
 
-### `npm start`
+## Проектирование сервиса:
+**Стэк:** Языки JavaScript и TypeScript. Scss в качестве препроцессора. ~~Фреймворк~~ Библиотека React. Библиотека компонентов Ant Design. И стандартные настройки react-create-app под TypeScript.
+**Интерфейс:**  Веб приложение, адаптированное под разные разрешения экранов. 
+**Формат Ответа:** Страница на сайте с информацией:
+ - Страна и Флаг
+ - Регион или Город
+ - Дата
+ - Текущая, Минимальная и Максимальная температура
+ - Ощущаемая температура
+ - Статус погоды (Облачно, Чистое небо и тд)
+ - Влажность
+ - Давление
+ - Скорость ветра
+ - Время заката и рассвета
+ - Что можно одеть в такую погоду
+ - Что можно взять с собой в такую погоду
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+**Процесс работы приложения:** 
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+ - Пользователь разрешает либо запрещает геолокацию браузера
+ - При разрешение используем координаты из браузера, при запрете используем координаты из геолокации полученные по ip пользователя
+ - Запрашиваем данные о погоде по координатам у openweathermap.org api
+ - Данные о погоде и локации водопадом распределяются по react компонентам и отображаются пользователю на сайте (Redux для такого функционала не понадобился, при расширение платформы хранил бы все данные в redux)
 
-### `npm test`
+**Скриншот приложения:** 
+![2020-04-11_21-53-19](https://user-images.githubusercontent.com/43413472/79054201-49bd0980-7c43-11ea-9236-52cb49438827.png)
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Быстрая установка:
+Для работы команд необходимы установленные node и npm.
 
-### `npm run build`
+### Клонировать репозиторий
+`git clone https://github.com/Fuchsoria/weather.git`
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Установка зависимостей 
+`npm install`
+В корне проекта команда установить все зависимости в node_modules
+  
+### Запуск режима разработки
+`npm start`
+Ссылка на режим разработки в браузере: [http://localhost:3000](http://localhost:3000)
+  
+### Сборка проекта под публикацию
+`npm run build`
+Соберёт проект в папку build без source-map файлов
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Остальная информация:
+[Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started)
+[React documentation](https://reactjs.org/)
