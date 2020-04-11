@@ -1,10 +1,16 @@
 .sunrise {
   margin: 15px auto;
   &__image {
-    width: 200px;
-    height: 200px;
+    display: block;
+    margin: 0 auto;
+    width: 50%;
+    height: auto;
   }
   &__text {
     text-align: center;
+    margin: 0 0 .7em 0;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1;
   }
 }

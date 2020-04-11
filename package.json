@@ -1,22 +1,19 @@
 {
   "name": "weather",
-  "version": "0.2.0",
+  "version": "0.5.0",
   "homepage": "./",
   "private": true,
   "dependencies": {
     "@types/classnames": "^2.2.10",
-    "@types/node": "^12.12.35",
-    "@types/react": "^16.9.34",
-    "@types/react-dom": "^16.9.6",
-    "@types/react-redux": "^7.1.7",
-    "antd": "^4.1.2",
-    "normalize.css": "^8.0.1",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
+    "@types/node": "12.12.35",
+    "@types/react": "16.9.34",
+    "@types/react-dom": "16.9.6",
+    "antd": "4.1.2",
+    "normalize.css": "8.0.1",
+    "react": "16.13.1",
+    "react-dom": "16.13.1",
     "react-scripts": "3.4.1",
-    "redux": "^4.0.5",
-    "redux-actions": "^2.6.5",
-    "typescript": "^3.7.5"
+    "typescript": "3.7.5"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -39,8 +36,8 @@
     ]
   },
   "devDependencies": {
-    "cross-env": "^7.0.2",
-    "gh-pages": "^2.2.0",
-    "node-sass": "^4.13.1"
+    "cross-env": "7.0.2",
+    "gh-pages": "2.2.0",
+    "node-sass": "4.13.1"
   }
 }

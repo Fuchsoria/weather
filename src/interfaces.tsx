@@ -1,5 +1,6 @@
 export interface LocationInfoProps {
   country: string;
+  countryCode: string;
   regionName: string;
 }
 
@@ -29,4 +30,42 @@ export interface SunsetProps {
 
 export interface WeatherImageProps {
   condition: string;
+}
+
+export interface ForecastProgressProps {
+  min: number;
+  max: number;
+}
+
+export interface AdvicesContainerProps {
+  status: string;
+  feelsLike: number;
+}
+
+export interface AdvicesDressProps {
+  temperature: number;
+}
+
+export interface AdvicesAttributesProps {
+  temperature: number;
+  status: string;
+}
+
+export interface WeatherForecastProps {
+  main: string;
+  description: string;
+  temp: number;
+  tempFeelsLike: number;
+  tempMin: number;
+  tempMax: number;
+}
+export interface WeatherDetailsProps {
+  pressure: number;
+  humidity: number;
+  windSpeed: number;
+}
+
+export interface WeatherSunProps {
+  sunrise: number;
+  sunset: number;
 }

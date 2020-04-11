@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import WeatherContainer from '../WeatherContainer';
-import AdvicesContainer from '../AdvicesContainer';
 import LocationInfo from '../../Components/LocationInfo';
 import { GEO_API_LINK, WEATHER_API_LINK, WEATHER_API_KEY } from '../../Configurations/config';
 import { LOADING_MESSAGE, LOCATION_API_ERROR, WEATHER_API_ERROR } from '../../Configurations/constants';
@@ -12,6 +11,7 @@ export default class ContentContainer extends Component {
     isError: false,
     errorMessage: '',
     country: '',
+    countryCode: '',
     regionName: '',
     weather: {
       main: '',
@@ -45,6 +45,7 @@ export default class ContentContainer extends Component {
 
         this.setState({
           country: result.country,
+          countryCode: result.countryCode,
           regionName: result.regionName,
         });
 
@@ -133,14 +134,15 @@ export default class ContentContainer extends Component {
 
     return (
       <div className={styles.container}>
+        {this.state.country && (
+          <LocationInfo
+            country={this.state.country}
+            countryCode={this.state.countryCode}
+            regionName={this.state.regionName}
+          />
+        )}
         <div className={styles.content}>
           {this.state.weather.temp && <WeatherContainer weather={this.state.weather} />}
-          <div className="content__visual">
-            {this.state.country && this.state.regionName && (
-              <LocationInfo country={this.state.country} regionName={this.state.regionName} />
-            )}
-            <AdvicesContainer />
-          </div>
         </div>
       </div>
     );

@@ -1,0 +1,42 @@
+.location {
+  &__container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 0 1em 0;
+  }
+  &__country {
+    margin: 0;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 1;
+  }
+  &__region {
+    margin: 0;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 1;
+  }
+}
+
+@media screen and (max-width: 575px) {
+  .location {
+    &__container {
+      flex-direction: column;
+    }
+    &__country {
+      margin: 5px 0 0 0;
+      font-weight: 500;
+      font-size: 20px;
+      line-height: 1;
+      order: 3;
+    }
+    &__region {
+      margin: 0;
+      font-weight: 500;
+      font-size: 18px;
+      line-height: 1;
+      order: 2;
+    }
+  }
+}
