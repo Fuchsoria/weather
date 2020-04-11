@@ -17,6 +17,10 @@
     font-size: 18px;
     line-height: 1;
   }
+  &__image {
+    display: block;
+    margin: 0 5px;
+  }
 }
 
 @media screen and (max-width: 575px) {
@@ -26,16 +30,10 @@
     }
     &__country {
       margin: 5px 0 0 0;
-      font-weight: 500;
-      font-size: 20px;
-      line-height: 1;
       order: 3;
     }
     &__region {
       margin: 0;
-      font-weight: 500;
-      font-size: 18px;
-      line-height: 1;
       order: 2;
     }
   }

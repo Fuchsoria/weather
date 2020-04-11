@@ -6,7 +6,7 @@ export default function LocationInfo({ country, countryCode, regionName }: Locat
   return (
     <div className={styles['location__container']}>
       <p className={styles['location__country']}>Country: {country}</p>
-      <img src={`https://www.countryflags.io/${countryCode}/flat/32.png`} alt={country} />
+      <img className={styles['location__image']} src={`https://www.countryflags.io/${countryCode}/flat/32.png`} alt={country} />
       <p className={styles['location__region']}>Region: {regionName}</p>
     </div>
   );
