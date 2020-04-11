@@ -29,26 +29,12 @@ export default class ContentContainer extends Component {
   };
 
   componentDidMount() {
+    this.getLocation();
+  }
+
+  getWeather = (latitude: number, longitude: number) => {
     this.onLoading(LOADING_MESSAGE);
-    fetch(`${GEO_API_LINK}/ipgeo?apiKey=${GEO_API_KEY}&fields=country_name,country_code2,state_prov,zipcode&output=json`)
-      .then((response) => {
-        if (response.status !== 200) {
-          throw new Error(LOCATION_API_ERROR);
-        }
-
-        return response.json();
-      })
-      .then((result) => {
-        this.setState({
-          country: result.country_name,
-          countryCode: result.country_code2,
-          regionName: result.state_prov,
-        });
-
-        return fetch(
-          `${WEATHER_API_LINK}/data/2.5/weather?zip=${result.zipcode},${result.country_code2}&appid=${WEATHER_API_KEY}&units=metric`
-        );
-      })
+    fetch(`${WEATHER_API_LINK}/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${WEATHER_API_KEY}&units=metric`)
       .then((weatherResponse) => {
         if (weatherResponse.status !== 200) {
           throw new Error(WEATHER_API_ERROR);
@@ -57,44 +43,70 @@ export default class ContentContainer extends Component {
         return weatherResponse.json();
       })
       .then((weatherResult) => {
-        if (weatherResult.cod !== 200) {
-          throw new Error(WEATHER_API_ERROR);
-        }
-        this.setState(
-          () => {
-            const {
-              weather: [{ main, description }],
-              main: { temp, feels_like, temp_min, temp_max, pressure, humidity },
-              wind: { speed },
-              sys: { sunrise, sunset },
-            } = weatherResult;
+        this.setState(() => {
+          const {
+            weather: [{ main, description }],
+            main: { temp, feels_like, temp_min, temp_max, pressure, humidity },
+            wind: { speed },
+            sys: { sunrise, sunset, country },
+            name,
+          } = weatherResult;
 
-            return {
-              weather: {
-                main,
-                description,
-                temp,
-                tempFeelsLike: feels_like,
-                tempMin: temp_min,
-                tempMax: temp_max,
-                pressure,
-                humidity,
-                windSpeed: speed,
-                sunrise,
-                sunset,
-              },
-            };
-          },
-          () => console.log(this.state.weather)
-        );
+          return {
+            weather: {
+              main,
+              description,
+              temp,
+              tempFeelsLike: feels_like,
+              tempMin: temp_min,
+              tempMax: temp_max,
+              pressure,
+              humidity,
+              windSpeed: speed,
+              sunrise,
+              sunset,
+            },
+            country,
+            countryCode: country,
+            regionName: name,
+          };
+        });
 
         this.onStable();
       })
       .catch((err) => {
-        console.log(err);
-
         this.onError(err);
       });
+  };
+
+  getWeatherByBrowserGeo = (position: any) => {
+    this.getWeather(position.coords.latitude, position.coords.longitude);
+  };
+
+  getWeatherByIpGeo = () => {
+    this.onLoading(LOADING_MESSAGE);
+    fetch(`${GEO_API_LINK}/ipgeo?apiKey=${GEO_API_KEY}&fields=latitude,longitude&output=json`)
+      .then((response) => {
+        if (response.status !== 200) {
+          throw new Error(LOCATION_API_ERROR);
+        }
+        return response.json();
+      })
+      .then((result) => {
+        this.onStable();
+        this.getWeather(result.latitude, result.longitude);
+      })
+      .catch((err) => {
+        this.onError(err);
+      });
+  };
+
+  getLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(this.getWeatherByBrowserGeo, this.getWeatherByIpGeo);
+    } else {
+      console.log('Geo Location not supported by browser');
+    }
   }
 
   onLoading(message: string) {
@@ -138,7 +150,7 @@ export default class ContentContainer extends Component {
           />
         )}
         <div className={styles.content}>
-          {this.state.weather.temp && <WeatherContainer weather={this.state.weather} />}
+          {this.state.weather.main && <WeatherContainer weather={this.state.weather} />}
         </div>
       </div>
     );
