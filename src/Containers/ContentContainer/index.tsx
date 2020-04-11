@@ -20,6 +20,8 @@ export default class ContentContainer extends Component {
       tempFeelsLike: 0,
       tempMin: 0,
       tempMax: 0,
+      pressure: 0,
+      humidity: 0,
       windSpeed: 0,
       sunrise: 0,
       sunset: 0,
@@ -65,7 +67,7 @@ export default class ContentContainer extends Component {
           () => {
             const {
               weather: [{ main, description }],
-              main: { temp, feels_like, temp_min, temp_max },
+              main: { temp, feels_like, temp_min, temp_max, pressure, humidity },
               wind: { speed },
               sys: { sunrise, sunset },
             } = weatherResult;
@@ -78,6 +80,8 @@ export default class ContentContainer extends Component {
                 tempFeelsLike: feels_like,
                 tempMin: temp_min,
                 tempMax: temp_max,
+                pressure,
+                humidity,
                 windSpeed: speed,
                 sunrise,
                 sunset,
@@ -129,12 +133,12 @@ export default class ContentContainer extends Component {
 
     return (
       <div className={styles.container}>
-        {this.state.country && this.state.regionName && (
-          <LocationInfo country={this.state.country} regionName={this.state.regionName} />
-        )}
         <div className={styles.content}>
           {this.state.weather.temp && <WeatherContainer weather={this.state.weather} />}
           <div className="content__visual">
+            {this.state.country && this.state.regionName && (
+              <LocationInfo country={this.state.country} regionName={this.state.regionName} />
+            )}
             <AdvicesContainer />
           </div>
         </div>

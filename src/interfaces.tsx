@@ -11,6 +11,8 @@ export interface WeatherContainerProps {
     tempFeelsLike: number;
     tempMin: number;
     tempMax: number;
+    pressure: number;
+    humidity: number;
     windSpeed: number;
     sunrise: number;
     sunset: number;
