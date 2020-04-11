@@ -36,18 +36,25 @@ Serverless браузерное приложение прогноза погод
 Для работы команд необходимы установленные node и npm.
 
 ### Клонировать репозиторий
-`git clone https://github.com/Fuchsoria/weather.git`
+
+    git clone https://github.com/Fuchsoria/weather.git
 
 ### Установка зависимостей 
-`npm install`
-В корне проекта команда установить все зависимости в node_modules
+
+    npm install
+
+В корне проекта команда установит все зависимости в node_modules
   
 ### Запуск режима разработки
-`npm start`
-Ссылка на режим разработки в браузере: [http://localhost:3000](http://localhost:3000)
+
+    npm start
+
+Команда запустит режим разработки, ссылка в браузере: [http://localhost:3000](http://localhost:3000)
   
 ### Сборка проекта под публикацию
-`npm run build`
+
+    npm run build
+
 Соберёт проект в папку build без source-map файлов
 
 ### Остальная информация:
