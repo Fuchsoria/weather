@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
+import { Card } from 'antd';
+import cn from 'classnames';
 import { WeatherContainerProps } from '../../interfaces';
 import WeatherImage from '../../Components/WeatherImage';
 import Sunrise from '../../Components/Sunrise';
 import Sunset from '../../Components/Sunset';
+import ForecastProgress from '../../Components/ForecastProgress';
+import { getUiDate } from '../../Utils/dateUtils';
+import { toCapitalize } from '../../Utils/textUtils';
 import styles from './styles.module.scss';
 
 export default class WeatherContainer extends Component<WeatherContainerProps> {
@@ -20,24 +25,42 @@ export default class WeatherContainer extends Component<WeatherContainerProps> {
       sunrise,
       sunset,
     } = this.props.weather;
+    const { day, month, hours, minutes } = getUiDate();
+    const paragraphWithoutMargin = cn([styles['weather__paragraph'], styles['weather__paragraph_margin_zero']]);
 
     return (
       <div className={styles.weather}>
-        <WeatherImage condition={main} />
-        <p>Now is {description}</p>
-        <div>
-          <p>Current Temperature: {temp.toFixed(1)} &#8451;</p>
-          <p>Current Pressure: {pressure} hPa</p>
-          <p>Current Humidity: {humidity} &#37;</p>
-          <p>Wind Speed: {windSpeed.toFixed(1)} Km/h</p>
-        </div>
-        <div>
-          <p>Minimal Temperature: {tempMin.toFixed(1)} &#8451;</p>
-          <p>Maximal Temperature: {tempMax.toFixed(1)} &#8451;</p>
-          <p>Temperature Feels like: {tempFeelsLike.toFixed(1)} &#8451;</p>
-        </div>
-        <Sunrise timestamp={sunrise} />
-        <Sunset timestamp={sunset} />
+        <Card>
+          <div className={styles['weather__main-container']}>
+            <div className={styles['weather__main-info']}>
+              <p className={styles['weather__date']}>
+                {day} {month}, {hours}:{minutes}
+              </p>
+              <p className={styles['weather__temperature']}>{temp.toFixed(1)} &#8451;</p>
+              <div className={styles['weather__progress']}>
+                <p className={paragraphWithoutMargin}>{tempMin.toFixed(1)} &#8451;</p>
+                <ForecastProgress min={tempMin} max={tempMax} />
+                <p className={paragraphWithoutMargin}>{tempMax.toFixed(1)} &#8451;</p>
+              </div>
+              <p className={paragraphWithoutMargin}>Feels like: {tempFeelsLike.toFixed(1)} &#8451;</p>
+            </div>
+            <div className="weather__visual-info">
+              <WeatherImage condition={main} />
+              <p className={styles['weather__description']}>{toCapitalize(description)}</p>
+            </div>
+          </div>
+        </Card>
+        <Card title="Current Details">
+          <p className={styles['weather__paragraph']}>Pressure: {pressure} hPa</p>
+          <p className={styles['weather__paragraph']}>Humidity: {humidity} &#37;</p>
+          <p className={styles['weather__paragraph']}>Wind Speed: {windSpeed.toFixed(1)} Km/h</p>
+        </Card>
+        <Card>
+          <div className={styles['weather__grid-columns']}>
+            <Sunrise timestamp={sunrise} />
+            <Sunset timestamp={sunset} />
+          </div>
+        </Card>
       </div>
     );
   }

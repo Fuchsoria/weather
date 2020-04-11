@@ -1,5 +1,6 @@
 export interface LocationInfoProps {
   country: string;
+  countryCode: string;
   regionName: string;
 }
 
@@ -29,4 +30,9 @@ export interface SunsetProps {
 
 export interface WeatherImageProps {
   condition: string;
+}
+
+export interface ForecastProgressProps {
+  min: number;
+  max: number;
 }
