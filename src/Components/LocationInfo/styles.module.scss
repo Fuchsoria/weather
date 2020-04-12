@@ -21,6 +21,10 @@
     display: block;
     margin: 0 5px;
   }
+  &__search {
+    margin: 0 10px;
+    max-width: 300px;
+  }
 }
 
 @media screen and (max-width: 575px) {
@@ -35,6 +39,10 @@
     &__region {
       margin: 0;
       order: 2;
+    }
+    &__search {
+      margin: 15px 10px 0 15px;
+      order: 4;
     }
   }
 }

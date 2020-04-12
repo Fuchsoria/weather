@@ -38,9 +38,13 @@ export default class ContentContainer extends Component<{}, ContentContainerStat
     this.getLocation();
   }
 
-  getWeather = (latitude: number, longitude: number) => {
+  getWeather = (latitude: number | null, longitude: number | null, city?: string) => {
+    const link = city
+      ? `${WEATHER_API_LINK}/data/2.5/weather?q=${city}&appid=${WEATHER_API_KEY}&units=metric`
+      : `${WEATHER_API_LINK}/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${WEATHER_API_KEY}&units=metric`;
+
     this.onLoading(LOADING_MESSAGE);
-    fetch(`${WEATHER_API_LINK}/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${WEATHER_API_KEY}&units=metric`)
+    fetch(link)
       .then((weatherResponse) => {
         if (weatherResponse.status !== 200) {
           throw new Error(WEATHER_API_ERROR);
@@ -49,6 +53,10 @@ export default class ContentContainer extends Component<{}, ContentContainerStat
         return weatherResponse.json();
       })
       .then((weatherResult) => {
+        if (weatherResult.cod !== 200) {
+          throw new Error(WEATHER_API_ERROR);
+        }
+
         this.setState(() => {
           const {
             weather: [{ main, description }],
@@ -81,8 +89,12 @@ export default class ContentContainer extends Component<{}, ContentContainerStat
         this.onStable();
       })
       .catch((err) => {
-        this.onError(err);
+        this.onError(err.message);
       });
+  };
+
+  getWeatherByCity = (city: string) => () => {
+    this.getWeather(null, null, city);
   };
 
   getWeatherByBrowserGeo = (position: any) => {
@@ -103,7 +115,7 @@ export default class ContentContainer extends Component<{}, ContentContainerStat
         this.getWeather(result.latitude, result.longitude);
       })
       .catch((err) => {
-        this.onError(err);
+        this.onError(err.message);
       });
   };
 
@@ -144,6 +156,12 @@ export default class ContentContainer extends Component<{}, ContentContainerStat
     if (this.state.isLoading || this.state.isError) {
       return (
         <div className={styles.container}>
+          <LocationInfo
+            country={this.state.country}
+            countryCode={this.state.countryCode}
+            regionName={this.state.regionName}
+            handleSubmit={this.getWeatherByCity}
+          />
           <p>{this.state.errorMessage}</p>
         </div>
       );
@@ -156,6 +174,7 @@ export default class ContentContainer extends Component<{}, ContentContainerStat
             country={this.state.country}
             countryCode={this.state.countryCode}
             regionName={this.state.regionName}
+            handleSubmit={this.getWeatherByCity}
           />
         )}
         <div className={styles.content}>

@@ -2,6 +2,7 @@ export interface LocationInfoProps {
   country: string;
   countryCode: string;
   regionName: string;
+  handleSubmit: (city: string) => () => void;
 }
 
 export interface WeatherContainerProps {
