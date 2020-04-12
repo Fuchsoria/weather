@@ -8,7 +8,7 @@ export default function HeaderContainer() {
   return (
     <Header className={styles.header}>
       <div className={styles['header__container']}>
-        <h2 className={styles['header__logo']}>Weather</h2>
+        <a href="/" className={styles['header__logo']}>Weather</a>
         <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['home']}>
           <Menu.Item key="home">Home</Menu.Item>
         </Menu>
