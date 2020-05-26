@@ -122,7 +122,7 @@ export default class ContentContainer extends Component<{}, ContentContainerStat
   getLocation() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(this.getWeatherByBrowserGeo, this.getWeatherByIpGeo, {
-        timeout: 1000,
+        timeout: 3000,
         enableHighAccuracy: true,
       });
     } else {
