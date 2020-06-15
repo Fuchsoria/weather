@@ -1,64 +1,41 @@
-# Умный сервис прогноза погоды 
-> Уровень: Звёздный?
+# Smart weather forecast service
+Serverless web forecast app with geolocation tracking. 
+>  **Demo:** [weather.fuchsoria.dev](https://weather.fuchsoria.dev)
 
-Serverless браузерное приложение прогноза погоды по геолокации. От пользователя не требуются никакие лишние действия так как вся необходимая для него информация будет выдана по его браузерной геолокации за счёт pwa методов браузера либо через получение геолокации со стороннего api за счёт ip пользователя. Так же можно произвести поиск по определенному городу.
+## About:
+**Stack:** JavaScript and TypeScript languages. Scss as a preprocessor. ~~Framework~~ React Library. Ant Design Component Library. And the standard react-create-app settings for TypeScript.
 
->  **Демо:** [weather.fuchsoria.dev](https://weather.fuchsoria.dev)
+**Interface**  Web application adapted for different screen resolutions.
 
-## Проектирование сервиса:
-**Стэк:** Языки JavaScript и TypeScript. Scss в качестве препроцессора. ~~Фреймворк~~ Библиотека React. Библиотека компонентов Ant Design. И стандартные настройки react-create-app под TypeScript.
+**Application process:** 
 
-**Интерфейс:**  Веб приложение, адаптированное под разные разрешения экранов. 
+ - User allows or denies browser geolocation
+ - When resolving, we use the coordinates from the browser, while rejected, we use the coordinates from geolocation obtained by the user's ip
+ - Request weather data for coordinates at openweathermap.org api
+ - Weather and location data are distributed among react components and displayed to the user on the site
 
-**Формат Ответа:** Страница на сайте с информацией:
- - Страна и Флаг
- - Регион или Город
- - Дата
- - Текущая, Минимальная и Максимальная температура
- - Ощущаемая температура
- - Статус погоды (Облачно, Чистое небо и тд)
- - Влажность
- - Давление
- - Скорость ветра
- - Время заката и рассвета
- - Что можно одеть в такую погоду
- - Что можно взять с собой в такую погоду
+**Screenshot:** ![2020-04-12_04-36-40](https://user-images.githubusercontent.com/43413472/79059186-4e9bb080-7c77-11ea-8c41-7a385ce9e17e.png)
 
-**Процесс работы приложения:** 
+## Quick install:
+Require installed node and npm.
 
- - Пользователь разрешает либо запрещает геолокацию браузера
- - При разрешение используем координаты из браузера, при запрете используем координаты из геолокации полученные по ip пользователя
- - Запрашиваем данные о погоде по координатам у openweathermap.org api
- - Данные о погоде и локации водопадом распределяются по react компонентам и отображаются пользователю на сайте (Redux для такого функционала не понадобился, при расширение платформы хранил бы все данные в redux)
-
-**Скриншот приложения:** 
-![2020-04-12_04-36-40](https://user-images.githubusercontent.com/43413472/79059186-4e9bb080-7c77-11ea-8c41-7a385ce9e17e.png)
-
-## Быстрая установка:
-Для работы команд необходимы установленные node и npm.
-
-### Клонировать репозиторий
+### Clone repo
 
     git clone https://github.com/Fuchsoria/weather.git
 
-### Установка зависимостей 
+### Install npm packages 
 
     npm install
 
-В корне проекта команда установит все зависимости в node_modules
-  
-### Запуск режима разработки
+### Launch development mode
 
     npm start
-
-Команда запустит режим разработки, ссылка в браузере: [http://localhost:3000](http://localhost:3000)
   
-### Сборка проекта под публикацию
+### Build in production
 
     npm run build
 
-Соберёт проект в папку build без source-map файлов
 
-### Остальная информация:
+### Other information:
 [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started)
 [React documentation](https://reactjs.org/)
